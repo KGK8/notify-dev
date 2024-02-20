@@ -17,7 +17,7 @@ const App = () => {
   const firebaseApp = initializeApp(firebaseConfig);
   const messaging = getMessaging(firebaseApp);
 
-  function sendPushNotification(userId, title, body) {}
+  // function sendPushNotification(userId, title, body) {}
 
   const requestForToken = (setTokenFound) => {
     return getToken(messaging, {
@@ -41,7 +41,7 @@ const App = () => {
       });
   };
   useEffect(() => {
-    sendPushNotification(userId, title, body);
+    // sendPushNotification(userId, title, body);
     requestForToken(setTokenFound);
   }, []);
 
