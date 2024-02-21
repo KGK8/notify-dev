@@ -1,7 +1,14 @@
-import { firebaseConfig } from "../src/config/FireBaseConfig";
-
 importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js");
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBgt9MNVfDyJ2KKEO4qO-xtwJVvEgvZfFk",
+  authDomain: "notifytest-69308.firebaseapp.com",
+  projectId: "notifytest-69308",
+  storageBucket: "notifytest-69308.appspot.com",
+  messagingSenderId: "255585187508",
+  appId: "1:255585187508:web:dc70cb88de93b7887f49e1",
+};
 
 firebase.initializeApp(firebaseConfig);
 
