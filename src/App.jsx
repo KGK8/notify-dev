@@ -8,7 +8,8 @@ const App = () => {
   useEffect(() => {
     async function getDeviceToken() {
       let tokens = await requestForDeviceToken();
-      setDeviceToken(tokens);
+      setDeviceToken(tokens); 
+      //write a service call to store device token in DB
     }
     getDeviceToken();
   }, []);
