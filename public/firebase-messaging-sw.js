@@ -1,13 +1,12 @@
 importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js");
   const firebaseConfig = {
-  apiKey: "AIzaSyAP8SK6v-U69DkpbBBGam9MfHz655Btnhc",
-  authDomain: "push-notifications-7d36c.firebaseapp.com",
-  projectId: "push-notifications-7d36c",
-  storageBucket: "push-notifications-7d36c.appspot.com",
-  messagingSenderId: "657938320810",
-  appId: "1:657938320810:web:da23fe894563b20580afd3",
-  measurementId: "G-YY591VT263",
+  apiKey: "AIzaSyBgt9MNVfDyJ2KKEO4qO-xtwJVvEgvZfFk",
+  authDomain: "notifytest-69308.firebaseapp.com",
+  projectId: "notifytest-69308",
+  storageBucket: "notifytest-69308.appspot.com",
+  messagingSenderId: "255585187508",
+  appId: "1:255585187508:web:dc70cb88de93b7887f49e1"
 };
 
 
