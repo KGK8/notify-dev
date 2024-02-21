@@ -22,7 +22,25 @@ messaging.onBackgroundMessage(function (payload) {
   const notificationTitle = payload.data.title;
   const notificationOptions = {
     body: payload.data.body,
+    icon: payload.data.icon,
   };
-
   self.registration.showNotification(notificationTitle, notificationOptions);
 });
+
+//Code for adding event on click of notification
+self.addEventListener(
+  "notificationclick",
+  function (event) {
+    console.log(event.notification.data);
+    console.log(event);
+    switch (event.action) {
+      case "open_url":
+        clients.openWindow(event.notification.data.url);
+        break;
+      case "any_other_action":
+        clients.openWindow("https://www.example.com");
+        break;
+    }
+  },
+  false
+);

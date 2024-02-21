@@ -19,8 +19,6 @@ const App = () => {
   const firebaseApp = initializeApp(firebaseConfig);
   const messaging = getMessaging(firebaseApp);
 
-  // function sendPushNotification(userId, title, body) {}
-
   const requestForToken = (setTokenFound) => {
     return getToken(messaging, {
       vapidKey:
@@ -39,12 +37,11 @@ const App = () => {
         }
       })
       .catch((err) => {
-        setDeviceToken(err);
+        // setDeviceToken(err);
         console.log("An error occurred while retrieving token. ", err);
       });
   };
   useEffect(() => {
-    // sendPushNotification(userId, title, body);
     requestForToken(setTokenFound);
   }, []);
 
@@ -65,7 +62,7 @@ const App = () => {
   return (
     <>
       <h3>Device Token:</h3>
-      <h4 style={{ fontWeight: "400" }}>{deviceToken}</h4>
+      <h4 style={{ fontWeight: "400" }}>{deviceToken ?? ""}</h4>
       <button onClick={() => copyToken()} style={{ fontSize: "12px" }}>
         Click To Copy The Token
       </button>
