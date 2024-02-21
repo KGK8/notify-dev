@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 const App = () => {
   const [isTokenFound, setTokenFound] = useState(false);
@@ -30,13 +32,14 @@ const App = () => {
           setTokenFound(true);
           setDeviceToken(currentToken);
         } else {
-          console.log(
+          alert(
             "No registration token available. Request permission to generate one."
           );
           setTokenFound(false);
         }
       })
       .catch((err) => {
+        setDeviceToken(err);
         console.log("An error occurred while retrieving token. ", err);
       });
   };
@@ -45,9 +48,39 @@ const App = () => {
     requestForToken(setTokenFound);
   }, []);
 
+  const copyToken = () => {
+    navigator.clipboard.writeText(deviceToken);
+    toast.success("Device Token Copied Successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   return (
     <>
-      <h1>{deviceToken}</h1>
+      <h3>Device Token:</h3>
+      <h4 style={{ fontWeight: "400" }}>{deviceToken}</h4>
+      <button onClick={() => copyToken()} style={{ fontSize: "12px" }}>
+        Click To Copy The Token
+      </button>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };
