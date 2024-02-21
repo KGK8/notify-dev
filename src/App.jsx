@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 const App = () => {
   const [isTokenFound, setTokenFound] = useState(false);
-  const [deviceToken, setDeviceToken] =  
+  const [deviceToken, setDeviceToken] =  useState("");
   const firebaseConfig = {
     apiKey: "AIzaSyAP8SK6v-U69DkpbBBGam9MfHz655Btnhc",
     authDomain: "push-notifications-7d36c.firebaseapp.com",
