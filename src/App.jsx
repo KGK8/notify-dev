@@ -27,13 +27,20 @@ const App = () => {
       theme: "light",
     });
   };
-
+  
+const sendNot =() =>{ 
+  new Notification("To do list", { body: text, icon: img });
+}
+  
   return (
     <>
       <h3>Device Token:</h3>
       <h4 style={{ fontWeight: "400" }}>{deviceToken ?? ""}</h4>
       <button onClick={() => copyToken()} style={{ fontSize: "12px" }}>
         Click To Copy The Token
+      </button>
+      <button onClick={() => copyToken()} style={{ fontSize: "12px" }}>
+        Send Not
       </button>
       <ToastContainer
         position="top-right"
