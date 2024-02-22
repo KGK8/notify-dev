@@ -39,7 +39,7 @@ const sendNot =() =>{
       <button onClick={() => copyToken()} style={{ fontSize: "12px" }}>
         Click To Copy The Token
       </button>
-      <button onClick={() => copyToken()} style={{ fontSize: "12px" }}>
+      <button onClick={() => sendNot()} style={{ fontSize: "12px" }}>
         Send Not
       </button>
       <ToastContainer
