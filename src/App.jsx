@@ -1,59 +1,36 @@
-import { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { requestForDeviceToken } from "./config/FireBaseConfig";
+import React, { useState } from "react";
+
 const App = () => {
-  const [deviceToken, setDeviceToken] = useState("");
+  const [isGranted, setIsGranted] = useState(false);
 
-  useEffect(() => {
-    async function getDeviceToken() {
-      let tokens = await requestForDeviceToken();
-      setDeviceToken(tokens); 
-      //write a service call to store device token in DB
-    }
-    getDeviceToken();
-  }, []);
-
-  const copyToken = () => {
-    navigator.clipboard.writeText(deviceToken);
-    toast.success("Device Token Copied Successfully", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
+  const handlePermissionRequest = () => {
+    Notification.requestPermission().then((result) => {
+      if (result === "denied") {
+        alert("Notification permission denied");
+      } else if (result === "granted") {
+        setIsGranted(true);
+      }
     });
   };
-  
-const sendNot =() =>{ 
-  new Notification("To do list", { body: text, icon: img });
-}
-  
+
+  const sendNotification = () => {
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+      new Notification("Hello 👋", { body: "Sample Notification" });
+    }
+  };
+
   return (
     <>
-      <h3>Device Token:</h3>
-      <h4 style={{ fontWeight: "400" }}>{deviceToken ?? ""}</h4>
-      <button onClick={() => copyToken()} style={{ fontSize: "12px" }}>
-        Click To Copy The Token
-      </button>
-      <button onClick={() => sendNot()} style={{ fontSize: "12px" }}>
-        Send Not
-      </button>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+      {!isGranted && (
+        <button onClick={handlePermissionRequest}>
+          Request Notification Permission
+        </button>
+      )}
+      {isGranted && (
+        <button onClick={sendNotification}>Send Notification</button>
+      )}
     </>
   );
 };
