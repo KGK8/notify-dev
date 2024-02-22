@@ -4,13 +4,17 @@ const App = () => {
   const [isGranted, setIsGranted] = useState(false);
 
   const handlePermissionRequest = () => {
-    Notification.requestPermission().then((result) => {
-      if (result === "denied") {
-        alert("Notification permission denied");
-      } else if (result === "granted") {
-        setIsGranted(true);
-      }
-    });
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+      setIsGranted(true);
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          setIsGranted(true);
+        }
+      });
+    }
   };
 
   const sendNotification = () => {
@@ -18,6 +22,8 @@ const App = () => {
       alert("This browser does not support desktop notification");
     } else if (Notification.permission === "granted") {
       new Notification("Hello 👋", { body: "Sample Notification" });
+    } else {
+      alert("You have not granted permission for notifications");
     }
   };
 
